@@ -50,7 +50,8 @@ export class AppComponent implements OnInit {
   }
 
   download() {
-    const canvas: any = document.querySelector('#qr-code');
+
+    const canvas: HTMLCanvasElement = document.querySelector('#qr-code canvas');
     canvas.toBlob(blob => {
       FileSaver.saveAs(blob, 'qr_code.jpeg');
     });
