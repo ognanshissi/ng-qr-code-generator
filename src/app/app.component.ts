@@ -17,14 +17,15 @@ export class AppComponent implements OnInit {
 
   qrCodeData: any = null;
 
-  @ViewChild('qrcoderef', { static: false }) qrcoderef: ElementRef;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.formData = this.fb.group({
       firstName: new FormControl(null),
-      lastName: new FormControl(null)
+      lastName: new FormControl(null),
+      email: new FormControl(null),
+      address: new FormControl(null)
     });
 
   }
@@ -50,10 +51,8 @@ export class AppComponent implements OnInit {
 
   download() {
     const canvas = document.querySelector('#qr-code');
-
     canvas.toBlob(blob => {
       FileSaver.saveAs(blob, 'qr_code.jpeg');
     });
-
   }
 }

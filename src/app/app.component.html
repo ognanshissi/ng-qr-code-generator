@@ -12,9 +12,14 @@
           <mat-form-field>
             <input matInput placeholder="Firstname" formControlName="firstName">
           </mat-form-field>
-
           <mat-form-field>
             <input matInput placeholder="Lastname" formControlName="lastName">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="email" placeholder="email" formControlName="email">
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="address" formControlName="address"></textarea>
           </mat-form-field>
           <button mat-button mat-raised-button color="primary">Generate qr code</button>
         </div>
@@ -26,7 +31,7 @@
   <!-- qr code zone -->
   <mat-card *ngIf="qrCodeData !== null">
     <mat-card-title>QR Code</mat-card-title>
-    <qrcode #qrcoderef id="qr-code" [qrdata]="qrCodeData" [size]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    <qrcode id="qr-code" [qrdata]="qrCodeData" [size]="256" [errorCorrectionLevel]="'M'"></qrcode>
     <button mat-button mat-raised-button color="primary" (click)="print()" style="margin-right: 5px;"> Print the qr-code</button>
     <button mat-button mat-raised-button color="accent" (click)="download()">Download qr-code</button>
   </mat-card>
