@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,8 @@ export class AppComponent implements OnInit {
   formData: FormGroup;
 
   qrCodeData: any = null;
+
+  @ViewChild('qrcoderef', { static: false }) qrcoderef: ElementRef;
 
   constructor(private fb: FormBuilder) {}
 
@@ -30,9 +34,7 @@ export class AppComponent implements OnInit {
     this.qrCodeData = null;
 
     setTimeout(() => {
-      //
       let data = '';
-
       Object.keys(this.formData.value).forEach(item => {
         if (this.formData.value[item]) {
           data = data + `${item}: ${this.formData.value[item]}/`;
@@ -47,6 +49,11 @@ export class AppComponent implements OnInit {
   }
 
   download() {
+    const canvas = document.querySelector('#qr-code');
+
+    canvas.toBlob(blob => {
+      FileSaver.saveAs(blob, 'qr_code.jpeg');
+    });
 
   }
 }
