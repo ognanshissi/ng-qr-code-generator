@@ -3,26 +3,32 @@
 
 <!-- content -->
 <div class="card" style="padding: 2rem; width: 50%; align-self: center; margin: auto;">
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Favorite food" value="Sushi">
-    </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Leave a comment"></textarea>
-    </mat-form-field>
+  <mat-card style="margin-bottom: 20px;">
+    <mat-card-title>Fill up the form with your data</mat-card-title>
+    <mat-card-content>
+      <form class="example-form" [formGroup]="formData" (ngSubmit)="generateQRCode()">
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Firstname" formControlName="firstName">
+          </mat-form-field>
 
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </form>
+          <mat-form-field>
+            <input matInput placeholder="Lastname" formControlName="lastName">
+          </mat-form-field>
+          <button mat-button mat-raised-button color="primary">Generate qr code</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-  <mat-card>
-    <qrcode [qrdata]="'Your data'" [size]="256" [level]="'M'"></qrcode>
 
-    <button class="" (click)="print()">Print the qr-code</button>
+  <!-- qr code zone -->
+  <mat-card *ngIf="qrCodeData !== null">
+    <mat-card-title>QR Code</mat-card-title>
+    <qrcode [qrdata]="qrCodeData" [size]="256" [level]="'M'"></qrcode>
+    <button mat-button mat-raised-button color="primary" (click)="print()" style="margin-right: 5px;"> Print the qr-code</button>
+    <button mat-button mat-raised-button color="accent" (click)="download()">Download qr-code</button>
   </mat-card>
 </div>
 
