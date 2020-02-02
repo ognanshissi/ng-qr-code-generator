@@ -7,7 +7,7 @@
   <mat-card style="margin-bottom: 20px;">
     <mat-card-title>Fill up the form with your data</mat-card-title>
     <mat-card-content>
-      <form class="example-form" [formGroup]="formData" (ngSubmit)="generateQRCode()">
+      <form class="example-form" [formGroup]="formData" (ngSubmit)="generateQRCode()" autocomplete="off">
         <div class="example-container">
           <mat-form-field>
             <input matInput placeholder="Firstname" formControlName="firstName">
